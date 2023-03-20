@@ -1,0 +1,46 @@
+Additive_RNG<- function(a,z0,c,m,n,p)
+  {
+    {
+      a = readline("Masukkan Nilai a: ")
+      z0 = readline("Masukkan Nilai z0: ")
+      c = readline("Masukkan Nilai c: ")
+      m = readline("Masukkan Nilai m: ")
+      n = readline("Masukkan Nilai n: ")
+      p = readline("Masukkan Nilai p: ")
+    }
+    {
+    a = as.integer(a)
+    z0 = as.integer(z0)
+    c = as.integer(c)
+    m = as.integer(m)
+    n = as.integer(n)
+    p = as.integer(p)
+    }
+  
+  xi<- matrix(NA,n,3)
+  colnames(xi)<- c("aZ(i-1)+c","Xi","Ui")
+  for (i in 1:n)
+  {
+    xi[i,1]<- (a*z0+c)      #create value on first column (Zi = aZ0+c)
+    xi[i,2]<- xi[i,1]%%m    #create value on 2nd column (Zi*mod)
+    xi[i,3]<- xi[i,2]/m     #create value on 3th column
+    z0<- xi[i,2]            #z0 would be replace til' next looping
+  }
+  #View(xi)
+  
+  {
+  #get probabilty value of X from data in column "Xi" when do runif
+    p<- p #Probability Value
+    X<- c()
+      for (i in 1:nrow(xi))
+      {
+      X[i]<- runif(xi[i,2])
+      }
+    return(X)
+    Y<- (X[i]<=p)+0
+    #return(Y)
+    (tabel<- table(Y)/length(Y))
+    
+  }
+}
+Additive_RNG(a,z0,c,m,n,p)
