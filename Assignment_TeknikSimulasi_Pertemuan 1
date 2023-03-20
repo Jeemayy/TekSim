@@ -36,7 +36,7 @@ Additive_RNG<- function(a,z0,c,m,n,p)
     X<- c()
       for (i in 1:nrow(xi))
       {
-      X[i]<- runif(xi[i,2])
+      X[[i]]<- runif(xi[i,2])
       }
     return(X)
     Y<- (X[i]<=p)+0
