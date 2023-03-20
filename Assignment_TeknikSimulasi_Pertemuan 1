@@ -1,3 +1,5 @@
+### unfixed ###
+
 Additive_RNG<- function(a,z0,c,m,n,p)
   {
     {
