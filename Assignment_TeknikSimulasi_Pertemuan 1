@@ -31,4 +31,4 @@ generate_bernoulli <- function()
 }
 
 Y <- generate_bernoulli()
-table(Y)
+table(Y)/length(Y)
