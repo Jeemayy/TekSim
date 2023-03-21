@@ -2,13 +2,20 @@
 
 generate_bernoulli <- function()
 {
-  # input
+  # input parameter
   a <- as.integer(readline("Masukkan Nilai a: "))
   z0 <- as.integer(readline("Masukkan Nilai z0: "))
   c <- as.integer(readline("Masukkan Nilai c: "))
   m <- as.integer(readline("Masukkan Nilai m: "))
   n <- as.integer(readline("Masukkan Nilai n: "))
   p <- as.numeric(readline("Masukkan Nilai p: "))
+  
+  # generate fungsi percobaan bernoulli
+  trial <- function(n, p){
+    X <- runif(n)
+    Z <- (X <= p) + 0
+    (tabel <- table(Z)/length(Z))
+  }
   
   xi <- matrix(NA, n, 3)
   colnames(xi) <- c("aZ(i-1)+c", "Xi", "Ui")
@@ -21,14 +28,15 @@ generate_bernoulli <- function()
   }
   
   # Menggunakan kolom ketiga untuk nilai probabilitas percobaan bernoulli
-  # Note: untuk menggunakan kolom kedua sebagai nilai probabilitas percobaannya masih on proggress ^_^
-  Y <- numeric(n)
+  yi <- matrix(NA, n, 3)
+  colnames(yi) <- c("Xi", "0", "1")
   for (i in 1:n)
   {
-    Y[i] <- (xi[i, 3] <= p) + 0
+    yi[i,1] <- xi[i, 2]
+    yi[i,2:3] <- trial(xi[i,2],p)
   }
-  return(Y)
-}
-
-Y <- generate_bernoulli()
-table(Y)/length(Y)
+  View(xi)
+  View(yi)
+  }
+  
+generate_bernoulli()
