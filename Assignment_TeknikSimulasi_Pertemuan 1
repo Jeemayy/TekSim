@@ -1,48 +1,33 @@
-### unfixed ###
+### Jimy Munandar (B2A020089)
 
-Additive_RNG<- function(a,z0,c,m,n,p)
-  {
-    {
-      a = readline("Masukkan Nilai a: ")
-      z0 = readline("Masukkan Nilai z0: ")
-      c = readline("Masukkan Nilai c: ")
-      m = readline("Masukkan Nilai m: ")
-      n = readline("Masukkan Nilai n: ")
-      p = readline("Masukkan Nilai p: ")
-    }
-    {
-    a = as.integer(a)
-    z0 = as.integer(z0)
-    c = as.integer(c)
-    m = as.integer(m)
-    n = as.integer(n)
-    p = as.integer(p)
-    }
+generate_bernoulli <- function()
+{
+  # input
+  a <- as.integer(readline("Masukkan Nilai a: "))
+  z0 <- as.integer(readline("Masukkan Nilai z0: "))
+  c <- as.integer(readline("Masukkan Nilai c: "))
+  m <- as.integer(readline("Masukkan Nilai m: "))
+  n <- as.integer(readline("Masukkan Nilai n: "))
+  p <- as.numeric(readline("Masukkan Nilai p: "))
   
-  xi<- matrix(NA,n,3)
-  colnames(xi)<- c("aZ(i-1)+c","Xi","Ui")
+  xi <- matrix(NA, n, 3)
+  colnames(xi) <- c("aZ(i-1)+c", "Xi", "Ui")
   for (i in 1:n)
   {
-    xi[i,1]<- (a*z0+c)      #create value on first column (Zi = aZ0+c)
-    xi[i,2]<- xi[i,1]%%m    #create value on 2nd column (Zi*mod)
-    xi[i,3]<- xi[i,2]/m     #create value on 3th column
-    z0<- xi[i,2]            #z0 would be replace til' next looping
+    xi[i, 1] <- (a * z0 + c)    # membuat nilai pada kolom pertama (Zi = aZ0 + c)
+    xi[i, 2] <- xi[i, 1] %% m   # membuat nilai kolom kedua Zi*mod
+    xi[i, 3] <- xi[i, 2] / m    # membuat nilai uniform pada kolom ketiga
+    z0 <- xi[i, 2]              # z0 akan diganti sampai perulangan berikutnya
   }
-  #View(xi)
   
+  # Menggunakan kolom ketiga untuk nilai probabilitas percobaan bernoulli
+  Y <- numeric(n)
+  for (i in 1:n)
   {
-  #get probabilty value of X from data in column "Xi" when do runif
-    p<- p #Probability Value
-    X<- c()
-      for (i in 1:nrow(xi))
-      {
-      X[[i]]<- runif(xi[i,2])
-      }
-    return(X)
-    Y<- (X[i]<=p)+0
-    #return(Y)
-    (tabel<- table(Y)/length(Y))
-    
+    Y[i] <- (xi[i, 3] <= p) + 0
   }
+  return(Y)
 }
-Additive_RNG(a,z0,c,m,n,p)
+
+Y <- generate_bernoulli()
+table(Y)
