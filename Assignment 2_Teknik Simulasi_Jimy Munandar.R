@@ -1,9 +1,9 @@
 # Assignment 2 - Teknik Simulasi
 ## Membangkitkan Distribusi Geometrik dari RNG Additive
 ### Kelompok 4
-### Jimy Munandar
-### Ryan Mahardika
-### Ahmad Reyhan Syaifullah
+### Jimy Munandar B2A020089
+### Ryan Mahardika B2A020077
+### Ahmad Reyhan Syaifullah B2A020059
 
 
 generate_geom <- function()
